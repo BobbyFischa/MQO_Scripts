@@ -15,6 +15,7 @@ _Chat.CurrentTab = 1;
 _Chat.NextTab = function (Forward) {
     var NextTab = 1;
     var CurrentTabID = $('.TabSel').prop('id');
+    console.log(CurrentTabID);
     var CurrentTab = CurrentTabID[CurrentTabID.length -1];
 
     if(CurrentTab < 1 || CurrentTab > 5){
