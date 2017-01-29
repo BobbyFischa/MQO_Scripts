@@ -15,56 +15,32 @@ _Chat.CurrentTab = 1;
 _Chat.NextTab = function (Forward) {
     var NextTab = 1;
     var CurrentTabID = $('.TabSel').prop('id');
-
     var CurrentTab = CurrentTabID[CurrentTabID.length -1];
+
     if(CurrentTab < 1 || CurrentTab > 5){
-        ChangeChatChannel(1);
+        ChangeChatChannel(1); // If there's an error, default to public chat
         _Chat.CurrentTab = 1;
         console.log('ERROR - CurrentTab < 1 || CurrentTab > 5 ' + CurrentTab);
     }
     else
     {
-        if(Forward){
+        if(Forward){ // Tab to the right
             // Kingdom Chat was added out of order. Tabbing left to right -> 1, 2, 5, 3, 4
-            if (CurrentTab == 1){
-                NextTab = 2;
-            }
-            else if(CurrentTab == 2){
-                NextTab = 5;
-            }
-            else if(CurrentTab == 5){
-                NextTab = 3;
-            }
-            else if(CurrentTab == 3){
-                NextTab = 4;
-            }
-            else if(CurrentTab == 4){
-                NextTab = 1;
-            }
-            else{ // Seems to get stuck in trade/public sometimes. This will reset the tab to public
-                NextTab = 1;
-            }
+            if     (CurrentTab == 1){NextTab = 2;}
+            else if(CurrentTab == 2){NextTab = 5;}
+            else if(CurrentTab == 5){NextTab = 3;}
+            else if(CurrentTab == 3){NextTab = 4;}
+            else if(CurrentTab == 4){NextTab = 1;}
+            else                    {NextTab = 1;}
         }
-        else{
+        else{ // Tab to the left
             // Kingdom Chat was added out of order. Tabbing right to left -> 4, 3, 5, 2, 1
-            if (CurrentTab == 4){
-                NextTab = 3;
-            }
-            else if(CurrentTab == 3){
-                NextTab = 5;
-            }
-            else if(CurrentTab == 5){
-                NextTab = 2;
-            }
-            else if(CurrentTab == 2){
-                NextTab = 1;
-            }
-            else if(CurrentTab == 1){
-                NextTab = 4;
-            }
-            else{
-                NextTab = 1;
-            }
+            if     (CurrentTab == 4){NextTab = 3;}
+            else if(CurrentTab == 3){NextTab = 5;}
+            else if(CurrentTab == 5){NextTab = 2;}
+            else if(CurrentTab == 2){NextTab = 1;}
+            else if(CurrentTab == 1){NextTab = 4;}
+            else                    {NextTab = 1;}
         }
 
         ChangeChatChannel(NextTab);
