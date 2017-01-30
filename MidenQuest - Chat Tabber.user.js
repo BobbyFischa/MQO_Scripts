@@ -13,8 +13,8 @@ _Chat.ShiftKey = false;
 _Chat.CurrentTab = 1;
 _Chat.Next = 0;
 
-_Chat.NextTab = function (Forward) {
-    if(Forward){ // Tab to the right
+_Chat.NextTab = function (Right) {
+    if(Right){ // Tab to the right
         // Kingdom Chat was added out of order. Tabbing left to right -> 1, 2, 5, 3, 4
         if     (_Chat.CurrentTab == 1){_Chat.Next = 2;}
         else if(_Chat.CurrentTab == 2){_Chat.Next = 5;}
@@ -41,13 +41,9 @@ $(document).on('keyup keydown', function(e){_Chat.ShiftKey = e.shiftKey;}); // D
 
 $( document ).keydown(function(e) { // Handle tabbing / shift tabbing
     var keycode = (e.which) ? e.which : e.keyCode;
-    if(_Chat.ShiftKey && keycode == 9){
-        _Chat.NextTab(false);
-        e.preventDefault();
-    }
-    else if (keycode == 9)
-    {
-        _Chat.NextTab(true);
+    
+    if(keycode == 9){
+        _Chat.NextTab(!_Chat.ShiftKey); // Shift == true, tab left. false -> right
         e.preventDefault();
     }
 });
